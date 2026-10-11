@@ -1,0 +1,16 @@
+name: Unzip Archive
+on: workflow_dispatch
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Extract ZIP
+        run: 7z x Dawamm-1-10.zip -o./extracted
+      - name: Commit files
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add ./extracted
+          git commit -m "فك ضغط المشروع" || echo "No changes"
+          git push
